@@ -4,6 +4,6 @@
 App that tracks user location and save data
 
 
-![](home.gif)
+![](home.gif = 300x620)
 
-![](routes.gif)
+![](routes.gif = 300x620)
