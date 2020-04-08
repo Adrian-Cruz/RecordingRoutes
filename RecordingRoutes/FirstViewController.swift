@@ -18,13 +18,11 @@ class FirstViewController: UIViewController {
     let locationManager = CLLocationManager()
     let locationMarker = GMSMarker()
     var mapView = GMSMapView()
-    //var path = GMSMutablePath()
     
     var isRecording = false
     var button = UIButton()
     var routeUser = RoutesHandler()
-    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,16 +67,25 @@ class FirstViewController: UIViewController {
             let alert = SCLAlertView(appearance: appearance)
             let txt = alert.addTextField("Name")
             alert.addButton("Save") {
+                if self.routeUser.path.count() < 3 {
+                    SCLAlertView().showError("Error", subTitle: "Not enough coordinates")
+                    return
+                }
+                guard let text = txt.text, !text.isEmpty else {
+                    SCLAlertView().showError("Error", subTitle: "Please insert a name")
+                    return
+                }
                 print("Saving: \(txt.text)")
                 self.button.backgroundColor = UIColor.flatSkyBlue()
                 self.button.setTitle("Start", for: .normal)
                 self.isRecording = !self.isRecording
                 self.routeUser.name = txt.text ?? ""
                 self.routeUser.finalTime = Date()
+                
+                
                 self.routeUser.createRoute()
                 SCLAlertView().showInfo("Info", subTitle: "Route saved! :)")
                 MapsHandler.addMarker(inPosition: self.routeUser.path.coordinate(at: UInt(self.routeUser.path.count()-1)), inMapView: self.mapView, withTitle: "Final", withColor: UIColor.flatOrange())
-                //self.routeUser.path = GMSMutablePath()
                 self.routeUser = RoutesHandler()
             }
             alert.showEdit("Save Route", subTitle: "Please insert the name of route")
@@ -90,14 +97,11 @@ class FirstViewController: UIViewController {
             routeUser.initialTime = Date()
         }
     }
-    
-    
 }
 
 
 extension FirstViewController: CLLocationManagerDelegate {
   // handle delegate methods of location manager here
-    
     
     // called when the authorization status is changed for the core location permission
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -120,13 +124,9 @@ extension FirstViewController: CLLocationManagerDelegate {
         }
     }
     
-   
-    
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // .requestLocation will only pass one location to the locations array
         // hence we can access it by taking the first element of the array
-        
         
         if let location = locations.last {
             locationMarker.position = location.coordinate
@@ -135,8 +135,8 @@ extension FirstViewController: CLLocationManagerDelegate {
             locationMarker.map = mapView
             
             //let update = GMSCameraUpdate.fit(location.coordinate)
-            let vancouver = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            let currentPosition = GMSCameraUpdate.setTarget(vancouver)
+            let currentLocation = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let currentPosition = GMSCameraUpdate.setTarget(currentLocation)
             mapView.animate(with: currentPosition)
             
             if isRecording {

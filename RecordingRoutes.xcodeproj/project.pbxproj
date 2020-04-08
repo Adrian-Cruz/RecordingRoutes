@@ -10,7 +10,6 @@
 		3A2F85232433C0F500350726 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F85222433C0F500350726 /* AppDelegate.swift */; };
 		3A2F85252433C0F500350726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F85242433C0F500350726 /* SceneDelegate.swift */; };
 		3A2F85272433C0F500350726 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F85262433C0F500350726 /* FirstViewController.swift */; };
-		3A2F85292433C0F500350726 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F85282433C0F500350726 /* SecondViewController.swift */; };
 		3A2F852C2433C0F500350726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A2F852A2433C0F500350726 /* Main.storyboard */; };
 		3A2F852F2433C0F500350726 /* RecordingRoutes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F852D2433C0F500350726 /* RecordingRoutes.xcdatamodeld */; };
 		3A2F85312433C0F600350726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2F85302433C0F600350726 /* Assets.xcassets */; };
@@ -35,6 +34,7 @@
 		3A94219A2439217700149773 /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9421982439217700149773 /* timer.png */; };
 		3A94219B2439217700149773 /* ruler.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9421992439217700149773 /* ruler.png */; };
 		3A94219D243942F100149773 /* TimeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A94219C243942F100149773 /* TimeHandler.swift */; };
+		3AB4235E243D066400909081 /* RouteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4235D243D066400909081 /* RouteViewModel.swift */; };
 		AB526B25E4A111E095F1E621 /* Pods_RecordingRoutes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50B972D4737F1144044E2954 /* Pods_RecordingRoutes.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +44,6 @@
 		3A2F85222433C0F500350726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A2F85242433C0F500350726 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3A2F85262433C0F500350726 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		3A2F85282433C0F500350726 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3A2F852B2433C0F500350726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A2F852E2433C0F500350726 /* RecordingRoutes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecordingRoutes.xcdatamodel; sourceTree = "<group>"; };
 		3A2F85302433C0F600350726 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		3A9421982439217700149773 /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
 		3A9421992439217700149773 /* ruler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ruler.png; sourceTree = "<group>"; };
 		3A94219C243942F100149773 /* TimeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHandler.swift; sourceTree = "<group>"; };
+		3AB4235D243D066400909081 /* RouteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewModel.swift; sourceTree = "<group>"; };
 		50B972D4737F1144044E2954 /* Pods_RecordingRoutes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecordingRoutes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B99CAD13823C21CE39D18745 /* Pods-RecordingRoutes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecordingRoutes.debug.xcconfig"; path = "Target Support Files/Pods-RecordingRoutes/Pods-RecordingRoutes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +116,7 @@
 		3A2F85212433C0F500350726 /* RecordingRoutes */ = {
 			isa = PBXGroup;
 			children = (
+				3AB4235C243C0D0200909081 /* ViewModel */,
 				3A4275512435782100AAF1FA /* Controller */,
 				3A4275502435781A00AAF1FA /* View */,
 				3A42754F2435781100AAF1FA /* Model */,
@@ -123,7 +124,6 @@
 				3A2F85222433C0F500350726 /* AppDelegate.swift */,
 				3A2F85242433C0F500350726 /* SceneDelegate.swift */,
 				3A2F85262433C0F500350726 /* FirstViewController.swift */,
-				3A2F85282433C0F500350726 /* SecondViewController.swift */,
 				3A2F852A2433C0F500350726 /* Main.storyboard */,
 				3A2F85302433C0F600350726 /* Assets.xcassets */,
 				3A2F85322433C0F600350726 /* LaunchScreen.storyboard */,
@@ -174,6 +174,7 @@
 		3A4275502435781A00AAF1FA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3A3A191B243820F50076DCDE /* DetailsViewController.xib */,
 				3A3A19142437E4540076DCDE /* RouteTableViewCell.swift */,
 			);
 			path = View;
@@ -184,9 +185,16 @@
 			children = (
 				3A3A19122437E2300076DCDE /* RoutesViewController.swift */,
 				3A3A191A243820F50076DCDE /* DetailsViewController.swift */,
-				3A3A191B243820F50076DCDE /* DetailsViewController.xib */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		3AB4235C243C0D0200909081 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3AB4235D243D066400909081 /* RouteViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		A4ACF636BE092FB40B5BEE42 /* Frameworks */ = {
@@ -343,7 +351,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A2F85292433C0F500350726 /* SecondViewController.swift in Sources */,
 				3A2F85272433C0F500350726 /* FirstViewController.swift in Sources */,
 				3A2F852F2433C0F500350726 /* RecordingRoutes.xcdatamodeld in Sources */,
 				3A3A191F24386DEA0076DCDE /* MapsHandler.swift in Sources */,
@@ -354,6 +361,7 @@
 				3A3A19132437E2300076DCDE /* RoutesViewController.swift in Sources */,
 				3A94219D243942F100149773 /* TimeHandler.swift in Sources */,
 				3A9421952439112100149773 /* RoutesHandler.swift in Sources */,
+				3AB4235E243D066400909081 /* RouteViewModel.swift in Sources */,
 				3A2F85252433C0F500350726 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

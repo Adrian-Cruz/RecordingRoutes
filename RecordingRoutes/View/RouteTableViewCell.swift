@@ -14,6 +14,13 @@ class RouteTableViewCell: UITableViewCell {
     @IBOutlet weak var labelNameRoute: UILabel!
     @IBOutlet weak var labelInitialDateRoute: UILabel!
     
+    var routeViewModel : RouteViewModel! {
+        didSet {
+            labelNameRoute.text = routeViewModel.name
+            labelInitialDateRoute.text = routeViewModel.initialTimeString
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

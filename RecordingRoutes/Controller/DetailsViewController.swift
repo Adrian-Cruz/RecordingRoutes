@@ -22,46 +22,34 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var labelNameOfRoute: UILabel!
     
     var mapView = GMSMapView()
-    var path = GMSMutablePath()
-    var distance = ""
-    var time = ""
-    var nameOfRoute = ""
-    var currentRoute : Route?
+    var routeViewModel : RouteViewModel?
     var delegate: MyDataSendingDelegateProtocol?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewContainerMap.layer.cornerRadius = 15
-        labelDistance.text = distance
-        labelTime.text = time
-        labelNameOfRoute.text = nameOfRoute
-        
-        
+        labelDistance.text = routeViewModel?.distance
+        labelTime.text = routeViewModel?.time
+        labelNameOfRoute.text = routeViewModel?.name
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 16.0)
         mapView = GMSMapView(frame: self.viewContainerMap.bounds)
-        //mapView = GMSMapView.map(frame: viewContainerMap.bounds)
         viewContainerMap.addSubview(mapView)
         
-        let polyline = GMSPolyline(path: path)
+        let polyline = GMSPolyline(path: routeViewModel?.path)
         polyline.strokeWidth = 5.0
         polyline.geodesic = true
         polyline.map = mapView
         
         var bounds = GMSCoordinateBounds()
-        for index in 1...path.count() {
-            bounds = bounds.includingCoordinate(path.coordinate(at: index))
+        for index in 1...routeViewModel!.path.count() {
+            bounds = bounds.includingCoordinate(routeViewModel!.path.coordinate(at: index))
         }
         mapView.layer.cornerRadius = 15
         mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 60))
-        
-        let initialPosition = path.coordinate(at: UInt(0))
-        let finalPosition = path.coordinate(at: UInt(path.count()-1))
-        MapsHandler.addMarker(inPosition: initialPosition, inMapView: self.mapView, withTitle: "Inicio", withColor: UIColor.flatGreen())
-        MapsHandler.addMarker(inPosition: finalPosition, inMapView: self.mapView, withTitle: "Fin", withColor: UIColor.flatOrange())
+        MapsHandler.addMarker(inPosition: routeViewModel!.initialCoordintate, inMapView: self.mapView, withTitle: "Inicio", withColor: UIColor.flatGreen())
+        MapsHandler.addMarker(inPosition: routeViewModel!.finalCoordinate, inMapView: self.mapView, withTitle: "Fin", withColor: UIColor.flatOrange())
     }
 
     @IBAction func clickShare(_ sender: UIBarButtonItem) {
@@ -70,7 +58,7 @@ class DetailsViewController: UIViewController {
         self.view.drawHierarchy(in: bounds, afterScreenUpdates: false)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        let activityViewController = UIActivityViewController(activityItems: [img], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [img ?? UIImage()], applicationActivities: nil)
         self.present(activityViewController, animated: true, completion: nil)
     }
     
@@ -81,7 +69,7 @@ class DetailsViewController: UIViewController {
         let alert = SCLAlertView(appearance: appearance)
         alert.addButton("Yes") {
             print("Removing...")
-            RoutesHandler.removeRoute(route: self.currentRoute!)
+            RoutesHandler.removeRoute(routeViewModel: self.routeViewModel!)
             let dataToBeSent = 1
             self.delegate?.sendDataToFirstViewController(myData: dataToBeSent)
             self.dismiss(animated: true, completion: nil)

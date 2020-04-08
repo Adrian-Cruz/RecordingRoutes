@@ -8,6 +8,7 @@
 
 import Foundation
 import GoogleMaps
+import CoreData
 
 class RoutesHandler {
     
@@ -35,9 +36,27 @@ class RoutesHandler {
         RoutesHandler.saveChanges()
     }
     
-    static func removeRoute(route : Route) {
-        Global.context.delete(route)
-        saveChanges()
+    static func removeRoute(routeViewModel : RouteViewModel) {
+        do {
+            let found = try Global.context.existingObject(with: routeViewModel.idRoute)
+            Global.context.delete(found)
+            saveChanges()
+        } catch {
+            print("Can't find object \(error) to remove")
+        }
+    }
+    
+    static func getRoutes() -> [Route]{
+        var arrayOfRoutes = [Route]()
+        let request : NSFetchRequest<Route> = Route.fetchRequest()
+        let sort = NSSortDescriptor(key: "initialTime", ascending: false)
+        request.sortDescriptors = [sort]
+        do {
+            arrayOfRoutes = try Global.context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+        return arrayOfRoutes
     }
     
     static func saveChanges(){
